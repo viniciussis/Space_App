@@ -7,12 +7,12 @@ const StyledSearch = styled.div`
 `
 
 const StyledInput = styled.input`
-  width: 20rem;
+  width: 25rem;
   color: white;
   height: 1.8rem;
   padding: 0.8rem 1.5rem;
   border: 1px solid #A482EB;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   background: transparent;
   font-weight: 400;
   font-size: 1.4rem;
