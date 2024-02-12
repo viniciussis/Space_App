@@ -1,7 +1,9 @@
 import styled from "styled-components"
+import ButtonIcon from "../../ButtonIcon"
 
 const Figure = styled.figure`
-  max-width: ${props => props.$extended ? "90%" : "460px"};
+  width: ${props => props.$extended ? "90%" : "460px"};
+  max-width: 100%;
   box-shadow: 0.5rem 0.5rem 1rem #000c1d;
   display: flex;
   flex-direction: column;
@@ -10,26 +12,63 @@ const Figure = styled.figure`
   border-radius: 1rem;
   margin: 0;
 
-  figcaption{
+  & > img {
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+  }
+  figcaption {
+    background-color: #001634;
+    border-radius: 0px 0px 20px 20px;
     color: white;
-    padding: 1rem;
-    h3, h4 {
-      margin: 0.5rem;
+    box-sizing: border-box;
+    padding: 12px;
+    h3 {
+        font-family: 'GandhiSansBold';
     }
-
     h4 {
-      font-weight: 500;
+        flex-grow: 1;
+    }
+    h3, h4 {
+        margin: 0;
+        font-size: 16px;
     }
   }
 `
 
-const Picture = ({extended=false, photo}) => {
+const StyledFooter = styled.footer`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    padding: 0 0.5rem;
+  }
+`
+
+const IconsContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`
+
+const Picture = ({extended=false, photo, onModalZoom}) => {
   return (
     <Figure $extended={extended}>
       <img src={photo.path} alt="" />
       <figcaption>
         <h3>{photo.titulo}</h3>
-        <h4>{photo.fonte}</h4>
+          <StyledFooter>
+            <h4>{photo.fonte}</h4>
+            <IconsContainer>
+              <ButtonIcon>
+                <img src="/icones/favorito.png" alt="favorite icon" />
+              </ButtonIcon>
+              {!extended && <ButtonIcon 
+                aria-hidden={extended} 
+                onClick={() => onModalZoom(photo)}
+              >
+                <img src="/icones/expandir.png" alt="expand icon" />
+              </ButtonIcon>}
+            </IconsContainer>
+          </StyledFooter>
       </figcaption>
     </Figure>
   )

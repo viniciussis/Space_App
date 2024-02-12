@@ -19,13 +19,13 @@ const AppContainer = styled.div`
   max-width: 100%;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 0 1.5rem;
   box-sizing: border-box;
 `
 
 const MainContainer = styled.div`
   display: flex;
   gap: 2rem;
+  padding: 0 1.5rem;
 `
 
 const GalleryContent = styled.div`
@@ -37,6 +37,11 @@ const GalleryContent = styled.div`
 
 const App = () => {
   const [galleryPhotos, setGalleryPhotos] = useState(photos);
+  const [photoModal, setPhotoModal] = useState(null);
+
+  const toggleFavorite = (photo) => {
+    
+  }
   return (
     <BgGradient>
       <GlobalStyles/>
@@ -46,10 +51,16 @@ const App = () => {
           <SideBar/>
           <GalleryContent>
             <Banner url={banner} text="A galeria mais completa de fotos do espaço!"/>      
-            <Gallery photos={galleryPhotos}/>  
+            <Gallery 
+              onSelected={photo => setPhotoModal(photo)} 
+              photos={galleryPhotos}
+            />
           </GalleryContent>
         </MainContainer>
-        <Modal></Modal>
+        <Modal 
+          photo={photoModal}
+          onClosing={() => setPhotoModal(null)}
+        />
         <Footer/>
       </AppContainer>
     </BgGradient>

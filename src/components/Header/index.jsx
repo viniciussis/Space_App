@@ -2,7 +2,7 @@ import styled from "styled-components"
 import SearchBar from "../SearchBar"
 
 const StyledHeader = styled.header`
-  padding: 3rem 0;
+  padding: 3rem 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
