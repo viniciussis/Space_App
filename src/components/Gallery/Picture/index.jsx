@@ -48,7 +48,8 @@ const IconsContainer = styled.div`
   gap: 0.5rem;
 `
 
-const Picture = ({extended = false, photo, onModalZoom}) => {
+const Picture = ({extended = false, photo, onModalZoom, toggleFavorite}) => {
+  const iconFavorite = photo.favorite ? "/icones/favorito-ativo.png" : "/icones/favorito.png"
   return (
     <Figure $extended={extended}>
       <img src={photo.path} alt="" />
@@ -57,8 +58,8 @@ const Picture = ({extended = false, photo, onModalZoom}) => {
           <StyledFooter>
             <h4>{photo.fonte}</h4>
             <IconsContainer>
-              <ButtonIcon>
-                <img src="/icones/favorito.png" alt="favorite icon" />
+              <ButtonIcon onClick={() => toggleFavorite(photo)}>
+                <img src={iconFavorite} alt="favorite icon" />
               </ButtonIcon>
               {!extended && <ButtonIcon 
                 aria-hidden={extended} 

@@ -29,13 +29,13 @@ const StyledDialog = styled.dialog`
   }
 `
 
-const Modal = ({photo, onClosing}) => {
+const Modal = ({photo, onClosing, toggleFavorite}) => {
   return (
     <>
     {photo && 
       <Overlay>
         <StyledDialog open={!!photo} onClose={onClosing}>
-          <Picture photo={photo} extended/>
+          <Picture  photo={photo} toggleFavorite={toggleFavorite}  extended/>
           <form method="dialog">
             <ButtonIcon formMethod="dialog">
               <img src="/icones/fechar.png" alt="close icon"/>

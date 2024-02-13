@@ -41,7 +41,7 @@ const App = () => {
   const [galleryPhotos, setGalleryPhotos] = useState(photos);
   const [modalPhoto, setModalPhoto] = useState(null);
   const [tagSelected, setTagSelected] = useState({"id": 0,"titulo": "Todos"});
-  const [searchText, setSearchText] = useState(null);
+  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     function searchingByText(){
@@ -64,6 +64,21 @@ const App = () => {
     searchingByTag();
   }, [tagSelected])
 
+  const toggleFavorite = (photoFavorite) => {
+    setGalleryPhotos(prevPhotos => 
+      prevPhotos.map(photo => ({
+        ...photo,
+        favorite: photo.id === photoFavorite.id ? !photoFavorite.favorite : photo.favorite
+      }))
+    )
+    if (photoFavorite.id === modalPhoto.id) {
+      setModalPhoto({
+        ...modalPhoto,
+        favorite: !modalPhoto.favorite
+      })
+    }
+  };
+
   return (
     <BgGradient>
       <GlobalStyles/>
@@ -77,11 +92,13 @@ const App = () => {
               tagSelected={tagSelected}
               onSelectingTag={tag => setTagSelected(tag)}
               onSelected={photo => setModalPhoto(photo)} 
+              toggleFavorite={toggleFavorite}
               photos={galleryPhotos}
             />
           </GalleryContent>
         </MainContainer>
         <Modal 
+          toggleFavorite={toggleFavorite}
           photo={modalPhoto}
           onClosing={() => setModalPhoto(null)}
         />

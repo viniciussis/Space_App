@@ -12,14 +12,15 @@ const StyledPictures = styled.div`
   gap: 1.25rem;
 `
 
-const Feed = ({photos = [], onSelected}) => {
+const Feed = ({photos = [], onSelected, toggleFavorite}) => {
   return (
     <FeedContainer>
       <Title>Navegue pela galeria</Title>
       <StyledPictures>
       {photos.map(photo => 
         <Picture 
-          photo={photo} 
+          photo={photo}
+          toggleFavorite={toggleFavorite} 
           key={photo.id}
           onModalZoom={onSelected}
         />
