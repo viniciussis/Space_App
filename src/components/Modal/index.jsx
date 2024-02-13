@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import Picture from "../Gallery/Picture"
 import ButtonIcon from "../ButtonIcon"
+import { useEffect } from "react"
 
 const Overlay = styled.div`
   background-color: rgba(0, 0, 0, 0.7);
@@ -11,17 +12,20 @@ const Overlay = styled.div`
   bottom: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  z-index: 5;
 `
 
 const StyledDialog = styled.dialog`
   background-color: transparent;
+  width: 40rem;
   padding: 0;
-  margin: 0;
   border: 0;
+  display: flex;
   form {
     button {
-      position: relative;
+      position: absolute;
+      top: 15px;
+      right: 75px;
       background-color: transparent;
       border-style: none;
       cursor: pointer;
@@ -30,12 +34,23 @@ const StyledDialog = styled.dialog`
 `
 
 const Modal = ({photo, onClosing, toggleFavorite}) => {
+  useEffect(() => {
+    if (photo) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+    
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [photo]);
   return (
     <>
     {photo && 
       <Overlay>
         <StyledDialog open={!!photo} onClose={onClosing}>
-          <Picture  photo={photo} toggleFavorite={toggleFavorite}  extended/>
+          <Picture photo={photo} toggleFavorite={toggleFavorite} extended/>
           <form method="dialog">
             <ButtonIcon formMethod="dialog">
               <img src="/icones/fechar.png" alt="close icon"/>

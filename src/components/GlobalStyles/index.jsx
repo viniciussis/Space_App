@@ -20,6 +20,11 @@ body {
   margin: 0;
   min-height: 100vh;
 }
+
+.modal-open {
+  overflow: hidden;
+}
+
 main {
   display: block;
 }
