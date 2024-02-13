@@ -11,11 +11,11 @@ const StyledHeader = styled.header`
   }
 `
 
-const Header = () => {
+const Header = ({onSearching}) => {
   return (
     <StyledHeader>
       <img src="/imagens/logo.png" alt="space app logo" />
-      <SearchBar/>
+      <SearchBar onSearching={onSearching} />
     </StyledHeader>
   )
 }

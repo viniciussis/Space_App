@@ -2,9 +2,8 @@ import styled from "styled-components"
 import ButtonIcon from "../../ButtonIcon"
 
 const Figure = styled.figure`
-  width: ${props => props.$extended ? "90%" : "460px"};
+  min-width: ${props => props.$extended ? "90%" : "24rem"};
   max-width: 100%;
-  box-shadow: 0.5rem 0.5rem 1rem #000c1d;
   display: flex;
   flex-direction: column;
   background-color: #001634;
@@ -13,8 +12,8 @@ const Figure = styled.figure`
   margin: 0;
 
   & > img {
-        max-width: 100%;
-        border-radius: 20px 20px 0 0;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
   }
   figcaption {
     background-color: #001634;
@@ -49,7 +48,7 @@ const IconsContainer = styled.div`
   gap: 0.5rem;
 `
 
-const Picture = ({extended=false, photo, onModalZoom}) => {
+const Picture = ({extended = false, photo, onModalZoom}) => {
   return (
     <Figure $extended={extended}>
       <img src={photo.path} alt="" />

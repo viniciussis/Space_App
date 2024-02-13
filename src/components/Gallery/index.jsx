@@ -11,10 +11,10 @@ const MainGallery = styled.div`
   gap: 2rem;
 `
 
-const Gallery = ({photos = [], onSelected}) => {
+const Gallery = ({photos = [], onSelected, tagSelected, onSelectingTag}) => {
   return (
     <GalleryContainer>
-      <Tags />
+      <Tags tagSelected={tagSelected} onSelectingTag={onSelectingTag}/>
       <MainGallery>
         <Feed photos={photos} onSelected={onSelected}/>
         <Hottests/>

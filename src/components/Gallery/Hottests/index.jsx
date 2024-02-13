@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Title from "../../Title"
-import photos from '../../../fotos.json'
+import hottests from './hottests.json'
 
 const HottestsContainer = styled.section`
   max-width: 15rem;
@@ -31,11 +31,10 @@ const Hottests = () => {
   return (
     <HottestsContainer>
       <Title $align="center" >Populares</Title>
-      {photos.map(photo  => 
+      {hottests.slice(0, 5).map(photo  => 
         <HottestPictures
           key={photo.id}
           src={photo.path}
-          alt={photo.titulo}
         />  
       )}
       <button>Ver mais</button>

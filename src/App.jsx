@@ -7,7 +7,7 @@ import Banner from "./components/Banner"
 import Footer from "./components/Footer"
 import Gallery from "./components/Gallery"
 import photos from "./fotos.json"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Modal from "./components/Modal"
 
 const BgGradient = styled.div`
@@ -33,33 +33,57 @@ const GalleryContent = styled.div`
   flex-direction: column;
   flex-grow: 1;
   gap: 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
 `
 
 const App = () => {
   const [galleryPhotos, setGalleryPhotos] = useState(photos);
-  const [photoModal, setPhotoModal] = useState(null);
+  const [modalPhoto, setModalPhoto] = useState(null);
+  const [tagSelected, setTagSelected] = useState({"id": 0,"titulo": "Todos"});
+  const [searchText, setSearchText] = useState(null);
 
-  const toggleFavorite = (photo) => {
-    
-  }
+  useEffect(() => {
+    function searchingByText(){
+      if (searchText){
+        let lowerCaseText = searchText.toLowerCase();
+        setGalleryPhotos(photos.filter(photo => photo.titulo.toLowerCase().includes(lowerCaseText)))
+      }
+    }
+    searchingByText();
+  }, [searchText])
+
+  useEffect(() => {
+    function searchingByTag() {
+      if (tagSelected.id === 0) {
+        setGalleryPhotos(photos)
+      } else {
+        setGalleryPhotos(photos.filter(photo => photo.tagId === tagSelected.id))
+      }
+    }
+    searchingByTag();
+  }, [tagSelected])
+
   return (
     <BgGradient>
       <GlobalStyles/>
       <AppContainer>
-        <Header/>
+        <Header onSearching={setSearchText}/>
         <MainContainer>
           <SideBar/>
           <GalleryContent>
             <Banner url={banner} text="A galeria mais completa de fotos do espaço!"/>      
-            <Gallery 
-              onSelected={photo => setPhotoModal(photo)} 
+            <Gallery
+              tagSelected={tagSelected}
+              onSelectingTag={tag => setTagSelected(tag)}
+              onSelected={photo => setModalPhoto(photo)} 
               photos={galleryPhotos}
             />
           </GalleryContent>
         </MainContainer>
         <Modal 
-          photo={photoModal}
-          onClosing={() => setPhotoModal(null)}
+          photo={modalPhoto}
+          onClosing={() => setModalPhoto(null)}
         />
         <Footer/>
       </AppContainer>

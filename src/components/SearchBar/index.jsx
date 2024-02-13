@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import search from "/icones/search.png"
+import ButtonIcon from "../ButtonIcon";
 
 const StyledSearch = styled.div`
   position: relative;
@@ -36,11 +37,13 @@ const IconSearch = styled.img`
   height: 2rem;
 `;
 
-const SearchBar = () => {
+const SearchBar = ({onSearching}) => {
   return (
     <StyledSearch>
-      <StyledInput placeholder="O que você procura?"/>
-      <IconSearch src={search} alt="search icon"/>
+      <StyledInput onBlur={(event) => onSearching(event.target.value)} placeholder="O que você procura?"/>
+      <ButtonIcon>
+        <IconSearch src={search} alt="search icon"/>
+      </ButtonIcon>
     </StyledSearch>
   )
 }
