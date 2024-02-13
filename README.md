@@ -2,6 +2,8 @@
 
 Bem-vindo ao Space App! Sua galeria de imagens astronômicas em React.js
 
+![Space App Home](/public/Space%20App.png)
+
 ## Conteúdo
 
 - [Visão Geral](#visão-geral)
@@ -38,7 +40,7 @@ Certifique-se de que você possui os seguintes requisitos antes de começar a us
 
 ## Como Usar
 
-1. Inicie o aplicativo: `npm run serve`
+1. Inicie o aplicativo: `npm run dev`
 2. Abra o navegador e acesse `http://localhost:5173/`
 
 ## Contribuindo
